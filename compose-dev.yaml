@@ -2,8 +2,8 @@ version: "2"
 services:
   ngrok:
     image: ngrok/ngrok:alpine
-    command: http http://websensor:80
+    command: http http://websensor:80 --region jp
     environment:
-      NGROK_AUTHTOKEN: ""
+      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN?Error NGROK_AUTHTOKEN is not set!!}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
