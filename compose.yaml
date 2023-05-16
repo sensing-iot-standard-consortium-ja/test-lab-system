@@ -63,7 +63,7 @@ services:
     restart: always
 
   connect:
-    image: public.ecr.aws/l1b7e4q9/testlab_connect:0.9.9
+    build: ./connect
     depends_on:
       - broker
       - schema-registry
