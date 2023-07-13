@@ -1,0 +1,12 @@
+[submodule "container-websensor"]
+	path = container-websensor
+	url = https://github.com/sensing-iot-standard-consortium-ja/container-websensor.git
+[submodule "container-python-consumer"]
+	path = container-python-consumer
+	url = https://github.com/sensing-iot-standard-consortium-ja/container-python-consumer.git
+[submodule "container-consumer"]
+	path = container-consumer
+	url = https://github.com/sensing-iot-standard-consortium-ja/container-consumer.git
+[submodule "container-repository"]
+	path = container-repository
+	url = https://github.com/sensing-iot-standard-consortium-ja/container-repository.git
