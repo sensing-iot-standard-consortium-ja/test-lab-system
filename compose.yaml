@@ -172,16 +172,20 @@ services:
     restart: always
 
   container-consumer:
-    image: public.ecr.aws/l1b7e4q9/iot_container_consumer:0.0.3
+    build:
+      context: ./container-consumer
+      dockerfile: Dockerfile
     environment:
       KAFKA_BROKER: broker:29092
       KAFKA_SUBSCRIBE_TOPIC: mb_ctopic
       KAFKA_PRODUCER_TOPIC_PREFIX: json
-      IOT_SCHEMA_REGISTORY: http://iot-registry:30002
+      IOT_SCHEMA_REGISTORY: http://schema-repository:30002
     restart: always
 
-  iot-registry:
-    image: public.ecr.aws/l1b7e4q9/iot_registory:0.0.1
+  schema-repository:
+    build:
+      context: ./container-repository
+      dockerfile: Dockerfile
     init: true
     ports:
       - 30002:30002
@@ -190,7 +194,10 @@ services:
     restart: always
 
   websensor:
-    image: public.ecr.aws/l1b7e4q9/websensor:0.0.2
+    build:
+      context: ./container-websensor
+      dockerfile: Dockerfile
+
     init: true
     ports:
       - 1188:80
@@ -200,10 +207,12 @@ services:
     restart: always
 
   testlab-edge:
-    # A&D社のUserProcess実装
-    image: public.ecr.aws/l1b7e4q9/testlab-edge:0.0.5
+    # Python実装
+    build:
+      context: ./container-python-consumer
+      dockerfile: Dockerfile
     environment:
-      IOT_SCHEMA_REGISTORY: http://iot-registry
+      IOT_SCHEMA_REGISTORY: http://schema-repository
       KAFKA_BROKER: broker:29092
       SUBSCRIBE_TOPIC: 'container_aandd_bloodpressure_1,container_aandd_acce_1,container_aandd_temperature_1,container_aandd_weight_1,container_aandd_1min_1'
 volumes:
